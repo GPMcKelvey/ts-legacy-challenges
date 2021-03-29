@@ -5,13 +5,13 @@ const WeatherDisplay = (props) => {
     console.log(props);
     
     let items = props.results;
-
+//change where padding is to table
     return (
-        <div style={{display: 'flex', justifyContent: 'center', backgroundColor: '#add8e6', paddingTop: '7.5em', paddingBottom: '15em', color: '#ffffff', fontFamily:'sans-serif', fontWeight:'lighter', fontSize:'24px'}}>    
+        <div style={{display: 'flex', justifyContent: 'center', color: '#ffffff', fontFamily:'sans-serif', fontWeight:'lighter', fontSize:'24px', marginTop:'2em'}}>    
             
         {items.main ? 
-            <Table>
-                <thead><tr><th>Todays Weather</th></tr></thead>
+            <Table style={{backgroundColor: '#add8e6', paddingTop: '1em', paddingBottom: '1em', paddingLeft: '1em', paddingRight: '1em' }}>
+                <thead><tr><th>Your Local Weather</th></tr></thead>
                             <br/>
                 <tbody>
                     <tr>

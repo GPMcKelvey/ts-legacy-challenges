@@ -46,8 +46,7 @@ class Weather extends Component<AcceptedProps, WeatherState> {
     }
 
     componentDidUpdate({}, prevState: WeatherState){
-        if(prevState.lat != this.state.lat){
-
+        if(prevState.lat !== this.state.lat){
                 this.fetchResult();
         }
     }
