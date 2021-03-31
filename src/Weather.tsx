@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { ChangeEvent, Component } from 'react';
 import WeatherDisplay from './WeatherDisplay';
 
 type WeatherState = {
     lat: number,
     lon: number,
-    results: []
+    humidity: number,
+    temp: number,
+    minTemp: number,
+    maxTemp: number,
 }
 
 type AcceptedProps = {
@@ -17,7 +20,10 @@ class Weather extends Component<AcceptedProps, WeatherState> {
         this.state = {
             lat: 0,
             lon: 0,
-            results: []
+            humidity: 0,
+            temp: 0,
+            minTemp: 0,
+            maxTemp: 0,
         }
         this.setResults = this.setResults.bind(this);
     }
@@ -54,21 +60,29 @@ class Weather extends Component<AcceptedProps, WeatherState> {
     fetchResult = () => {
         fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&appid=7a1807114aad9a1d5ff9ab42661fc2d8`)
         .then(res => res.json())
-        .then((json) => 
-            this.setRes(json)
+        .then((json) => {
+            this.setState({
+                humidity: json.main.humidity,
+                temp: json.main.temp,
+                minTemp: json.main.temp_min,
+                maxTemp: json.main.temp_max,
+            })
+        }
         )}
 
-        setRes = (event: any) => {
-            this.setState({results: event});
-            console.log(this.state.results)
-        }
+        // setRes = (event: ChangeEvent) => {
+        //     this.setState({
+                
+        //     });
+        //     console.log(this.state.results)
+        // }
 
 
    
     render() {
         return (
             <div>
-                <WeatherDisplay results={this.state.results}/>
+                <WeatherDisplay humidity={this.state.humidity} temp={this.state.temp} minTemp={this.state.minTemp}  maxTemp={this.state.maxTemp}/>
             </div>
         )
     }
